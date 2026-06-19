@@ -1,0 +1,419 @@
+/* DocNet design system — Impeccable-inspired product UI (healthcare lane) */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+
+  --ink: #152929;
+  --ink-muted: #3f5858;
+  --ink-subtle: #5c7373;
+  --ink-on-brand: #f4fbf9;
+
+  --canvas: #f3f0ea;
+  --canvas-deep: #e8e3da;
+  --surface: #fffdf9;
+  --surface-raised: #ffffff;
+
+  --brand: #0f766e;
+  --brand-hover: #0c5f59;
+  --brand-soft: #e3f3f0;
+  --brand-ring: rgba(15, 118, 110, 0.18);
+
+  --accent: #c2410c;
+  --accent-soft: #fff1e8;
+
+  --border: #d5dedc;
+  --border-strong: #b6c7c4;
+
+  --success: #047857;
+  --success-soft: #ecfdf5;
+  --danger: #b42318;
+  --danger-soft: #fef3f2;
+  --warning: #b45309;
+  --warning-soft: #fffbeb;
+
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-sm: 0 1px 2px rgba(21, 41, 41, 0.06);
+  --shadow-md: 0 12px 32px rgba(21, 41, 41, 0.08);
+  --shadow-lg: 0 24px 48px rgba(21, 41, 41, 0.1);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration: 180ms;
+
+  /* Legacy aliases used across pages */
+  --primary: var(--brand);
+  --primary-hover: var(--brand-hover);
+  --secondary: var(--ink-muted);
+  --background: var(--canvas);
+  --text: var(--ink);
+  --text-light: var(--ink-muted);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--canvas);
+  color: var(--ink);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 0% 0%, rgba(15, 118, 110, 0.07), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 100%, rgba(194, 65, 12, 0.05), transparent 50%);
+  z-index: -1;
+}
+
+h1,
+h2,
+h3,
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+a {
+  color: var(--brand);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--canvas-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+  border: 2px solid var(--canvas-deep);
+}
+
+.container {
+  width: min(1200px, 100% - 2rem);
+  margin-inline: auto;
+}
+
+.surface {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.card {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.glass {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  backdrop-filter: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.125rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition:
+    background-color var(--duration) var(--ease),
+    border-color var(--duration) var(--ease),
+    color var(--duration) var(--ease),
+    transform var(--duration) var(--ease),
+    box-shadow var(--duration) var(--ease);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: var(--ink-on-brand);
+  box-shadow: 0 1px 2px rgba(15, 118, 110, 0.25);
+}
+
+.btn-primary:not(:disabled):hover {
+  background: var(--brand-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(15, 118, 110, 0.22);
+}
+
+.btn-secondary {
+  background: var(--surface-raised);
+  color: var(--ink);
+  border-color: var(--border);
+}
+
+.btn-secondary:not(:disabled):hover {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.badge-open {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge-closed {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.brand-mark__icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.65rem;
+  background: linear-gradient(145deg, var(--brand) 0%, #115e59 100%);
+  color: var(--ink-on-brand);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.brand-mark__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.brand-mark__name {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  color: var(--ink);
+}
+
+.brand-mark__tagline {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+
+.page-shell {
+  min-height: 100vh;
+}
+
+.page-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 253, 249, 0.92);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+}
+
+.page-topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.page-topbar__link {
+  padding: 0.5rem 0.875rem;
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: background-color var(--duration) var(--ease), color var(--duration) var(--ease);
+}
+
+.page-topbar__link:hover,
+.page-topbar__link.is-active {
+  background: var(--brand-soft);
+  color: var(--brand);
+  text-decoration: none;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--ink-muted);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+.section-title {
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ink);
+}
+
+.drug-warning {
+  text-decoration: underline var(--danger) dotted 2px;
+  text-underline-offset: 4px;
+}
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-2 { gap: 0.5rem; }
+.gap-4 { gap: 1rem; }
+.w-full { width: 100%; }
+.w-fit { width: fit-content; }
+.text-right { text-align: right; }
+.opacity-50 { opacity: 0.5; }
+.cursor-not-allowed { cursor: not-allowed; }
+
+.topbar-user {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.topbar-user--clickable {
+  padding: 0.35rem 0.5rem 0.35rem 0.35rem;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: background-color var(--duration) var(--ease);
+}
+
+.topbar-user--clickable:hover {
+  background: var(--brand-soft);
+  text-decoration: none;
+}
+
+.topbar-user--clickable.is-active {
+  background: var(--brand-soft);
+}
+
+.topbar-user__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  overflow: hidden;
+}
+
+.topbar-user__avatar-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topbar-user__meta {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.topbar-user__name {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.topbar-user__role {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-subtle);
+}
+
+@media (max-width: 768px) {
+  .page-topbar {
+    flex-wrap: wrap;
+    padding: 0.875rem 1rem;
+  }
+}

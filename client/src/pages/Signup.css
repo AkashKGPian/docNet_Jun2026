@@ -1,0 +1,135 @@
+.signup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--background);
+}
+
+.signup-blob-1, .signup-blob-2 {
+  position: absolute;
+  width: 50vw;
+  height: 50vw;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.signup-blob-1 {
+  top: -20%;
+  left: -10%;
+  background-color: #e0e7ff; /* indigo-100 */
+}
+
+.signup-blob-2 {
+  bottom: -20%;
+  right: -10%;
+  background-color: #fce7f3; /* pink-100 */
+}
+
+.signup-card {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
+  z-index: 10;
+  padding: 2.5rem;
+}
+
+.signup-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.signup-header h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.signup-header p {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.signup-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+.signup-footer {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--text-light);
+}
+
+.signup-footer a {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.signup-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Reusing .input-group, .input-wrapper, .input-icon, .input-field from Login.css */
+/* We can just duplicate them here or ideally keep in index.css, but for MVP we duplicate or use global */
+.auth-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.auth-input-group label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-light);
+}
+
+.auth-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-icon {
+  position: absolute;
+  left: 1rem;
+  color: #94a3b8;
+}
+
+.auth-input-field {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background-color: white;
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--text);
+  transition: all 0.2s;
+}
+
+.auth-input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+select.auth-input-field {
+  appearance: none;
+}

@@ -1,0 +1,195 @@
+.rx-view-container {
+  min-height: 100vh;
+  background-color: var(--canvas);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rx-loading {
+  justify-content: center;
+  color: var(--ink-muted);
+}
+
+.rx-empty {
+  padding: 2rem;
+  text-align: center;
+  color: var(--ink-muted);
+  font-style: italic;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-md);
+}
+
+.rx-signature-label {
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.rx-actions {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.rx-paper {
+  background: white;
+  width: 100%;
+  max-width: 800px;
+  min-height: 900px;
+  padding: 4rem;
+  border-radius: 4px;
+  box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.1);
+  font-family: 'Times New Roman', Times, serif;
+  color: #1a1a1a;
+  position: relative;
+}
+
+.rx-header {
+  text-align: center;
+  border-bottom: 2px solid #222;
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.rx-hospital-name {
+  font-size: 2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-family: var(--font-display);
+  color: var(--brand);
+  margin-bottom: 0.25rem;
+}
+
+.rx-hospital-address {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.rx-doctor-name {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.rx-doctor-creds {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.rx-meta {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  font-size: 1rem;
+  border-bottom: 1px dashed #ccc;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+.rx-meta div {
+  margin-bottom: 0.5rem;
+}
+
+.rx-meta-label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+}
+
+.rx-symbol {
+  font-size: 3rem;
+  font-weight: bold;
+  font-family: Georgia, serif;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+}
+
+.rx-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 3rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+}
+
+.rx-table th {
+  text-align: left;
+  padding: 0.75rem 0.5rem;
+  border-bottom: 2px solid #ddd;
+  font-weight: 600;
+}
+
+.rx-table td {
+  padding: 1rem 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.rx-drug-name {
+  font-weight: 700;
+  color: #000;
+  font-size: 1.05rem;
+}
+
+.rx-notes-section {
+  margin-top: 3rem;
+}
+
+.rx-notes-section h3 {
+  font-family: var(--font-sans);
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.rx-notes-content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.rx-footer {
+  margin-top: 6rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rx-signature {
+  text-align: center;
+  border-top: 1px solid #333;
+  padding-top: 0.5rem;
+  width: 200px;
+}
+
+/* Print CSS */
+@media print {
+  @page {
+    margin: 0;
+    size: A4;
+  }
+  
+  body {
+    background: white;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  
+  .rx-view-container {
+    padding: 0;
+    background: none;
+    min-height: auto;
+  }
+  
+  .rx-paper {
+    box-shadow: none;
+    border: none;
+    padding: 2cm;
+    max-width: none;
+    border-radius: 0;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}

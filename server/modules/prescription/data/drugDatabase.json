@@ -1,0 +1,82 @@
+[
+  {
+    "generic_name": "Amoxicillin",
+    "brand_names": ["Amoxil", "Moxatag", "Novamox", "Almox"],
+    "common_doses": ["250mg", "500mg"],
+    "common_frequencies": ["TDS", "BD"],
+    "common_durations": ["5 days", "7 days"],
+    "category": "Antibiotic"
+  },
+  {
+    "generic_name": "Paracetamol",
+    "brand_names": ["Crocin", "Dolo", "Calpol", "Tylenol", "Panadol"],
+    "common_doses": ["500mg", "650mg"],
+    "common_frequencies": ["SOS", "TDS"],
+    "common_durations": ["3 days"],
+    "category": "Analgesic, Antipyretic"
+  },
+  {
+    "generic_name": "Pantoprazole",
+    "brand_names": ["Pan", "Pantocid", "Pantosec", "Protonix"],
+    "common_doses": ["40mg", "20mg"],
+    "common_frequencies": ["OD (Before Meals)", "BD"],
+    "common_durations": ["14 days", "1 month"],
+    "category": "Proton Pump Inhibitor (PPI)"
+  },
+  {
+    "generic_name": "Azithromycin",
+    "brand_names": ["Azithral", "Azee", "Zithromax"],
+    "common_doses": ["250mg", "500mg"],
+    "common_frequencies": ["OD"],
+    "common_durations": ["3 days", "5 days"],
+    "category": "Antibiotic"
+  },
+  {
+    "generic_name": "Levocetirizine",
+    "brand_names": ["1-AL", "Xyzal", "Levo-M"],
+    "common_doses": ["5mg"],
+    "common_frequencies": ["OD (Night)", "HS"],
+    "common_durations": ["5 days"],
+    "category": "Antihistamine"
+  },
+  {
+    "generic_name": "Ibuprofen",
+    "brand_names": ["Brufen", "Combiflam", "Advil"],
+    "common_doses": ["400mg", "200mg"],
+    "common_frequencies": ["TDS", "BD", "SOS"],
+    "common_durations": ["3 days", "5 days"],
+    "category": "NSAID"
+  },
+  {
+    "generic_name": "Metformin",
+    "brand_names": ["Glycomet", "Glucophage", "Riomet"],
+    "common_doses": ["500mg", "1000mg"],
+    "common_frequencies": ["BD", "OD"],
+    "common_durations": ["1 month", "Lifetime"],
+    "category": "Antidiabetic"
+  },
+  {
+    "generic_name": "Telmisartan",
+    "brand_names": ["Telma", "Micardis", "Telvas"],
+    "common_doses": ["40mg", "20mg", "80mg"],
+    "common_frequencies": ["OD"],
+    "common_durations": ["1 month"],
+    "category": "Antihypertensive"
+  },
+  {
+    "generic_name": "Atorvastatin",
+    "brand_names": ["Lipitor", "Atorva", "Storvas"],
+    "common_doses": ["10mg", "20mg", "40mg"],
+    "common_frequencies": ["OD (Night)"],
+    "common_durations": ["1 month"],
+    "category": "Statin (Cholesterol)"
+  },
+  {
+    "generic_name": "Amlodipine",
+    "brand_names": ["Amlong", "Amdepin", "Norvasc"],
+    "common_doses": ["2.5mg", "5mg", "10mg"],
+    "common_frequencies": ["OD"],
+    "common_durations": ["1 month"],
+    "category": "Calcium Channel Blocker"
+  }
+]
