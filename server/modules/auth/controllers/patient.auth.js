@@ -1,6 +1,4 @@
 const User = require('../models/User');
-const path = require('path');
-const fs = require('fs');
 const { hashPassword, verifyPassword } = require('../helpers/auth.helpers');
 const { signToken } = require('../helpers/jwt.helper');
 const {
@@ -12,7 +10,13 @@ const {
   getClearCsrfCookieOptions,
 } = require('../helpers/cookie.helper');
 const { generateCsrfToken } = require('../helpers/csrf.helper');
-const { uploadDir } = require('../middleware/upload.middleware');
+const {
+  isS3Configured,
+  uploadProfilePhoto,
+  deleteProfilePhoto,
+  uploadProfilePhotoLocal,
+  deleteProfilePhotoLocal,
+} = require('../../shared/s3.service');
 
 function serializePatient(user) {
   return {
@@ -43,13 +47,15 @@ function parseAllergies(value) {
   return [];
 }
 
-function deleteProfilePhotoFile(relativePath) {
-  if (!relativePath || !relativePath.startsWith('/uploads/profiles/')) return;
+async function removePreviousProfilePhoto(previousPhoto) {
+  if (!previousPhoto) return;
 
-  const absolutePath = path.join(uploadDir, path.basename(relativePath));
-  if (fs.existsSync(absolutePath)) {
-    fs.unlinkSync(absolutePath);
+  if (isS3Configured()) {
+    await deleteProfilePhoto(previousPhoto);
+    return;
   }
+
+  deleteProfilePhotoLocal(previousPhoto);
 }
 
 /**
@@ -273,10 +279,22 @@ exports.uploadProfilePhoto = async (req, res) => {
 
     const user = req.user;
     const previousPhoto = user.profilePicture;
-    user.profilePicture = `/uploads/profiles/${req.file.filename}`;
+
+    const uploadPayload = {
+      patientId: user._id.toString(),
+      buffer: req.file.buffer,
+      mimetype: req.file.mimetype,
+      originalName: req.file.originalname,
+    };
+
+    const uploaded = isS3Configured()
+      ? await uploadProfilePhoto(uploadPayload)
+      : uploadProfilePhotoLocal(uploadPayload);
+
+    user.profilePicture = uploaded.url;
     await user.save();
 
-    deleteProfilePhotoFile(previousPhoto);
+    await removePreviousProfilePhoto(previousPhoto);
 
     return res.status(200).json({
       success: true,
@@ -285,6 +303,8 @@ exports.uploadProfilePhoto = async (req, res) => {
     });
   } catch (error) {
     console.error('Upload Profile Photo Error:', error);
-    return res.status(500).json({ error: 'Internal server error while uploading profile photo.' });
+    return res.status(500).json({
+      error: error.message || 'Internal server error while uploading profile photo.',
+    });
   }
 };

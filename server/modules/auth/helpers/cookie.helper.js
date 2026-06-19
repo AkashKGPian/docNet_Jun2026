@@ -9,10 +9,16 @@ function resolveSameSite() {
   return 'lax';
 }
 
+function resolveSecureCookie() {
+  if (process.env.COOKIE_SECURE === 'true') return true;
+  if (process.env.COOKIE_SECURE === 'false') return false;
+  return process.env.NODE_ENV === 'production';
+}
+
 function buildCookieOptions({ httpOnly, maxAge }) {
   const options = {
     httpOnly,
-    secure: process.env.NODE_ENV === 'production',
+    secure: resolveSecureCookie(),
     sameSite: resolveSameSite(),
     path: '/',
   };

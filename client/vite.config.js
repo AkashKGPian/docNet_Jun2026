@@ -8,6 +8,7 @@ export default defineConfig({
     port: 5174,
     strictPort: true,
     proxy: {
+      // Dev only — local disk profile photos when S3 is not configured
       '/uploads': {
         target: 'http://localhost:5000',
         changeOrigin: true,

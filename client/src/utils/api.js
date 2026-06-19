@@ -9,15 +9,17 @@ export const SOCKET_URL =
 
 export function getAssetUrl(path) {
   if (!path) return null;
+  // CloudFront / absolute URLs — use as-is in all environments
   if (/^https?:\/\//i.test(path)) return path;
 
   const normalized = path.startsWith('/') ? path : `/${path}`;
 
-  // Dev: load via Vite proxy (/uploads → API) so navbar images are same-origin
+  // Dev only: legacy local disk photos via Vite /uploads proxy
   if (import.meta.env.DEV) {
     return normalized;
   }
 
+  // Production: profile photos should be CloudFront URLs; legacy /uploads paths are unsupported
   return `${SOCKET_URL}${normalized}`;
 }
 

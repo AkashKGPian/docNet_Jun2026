@@ -1,21 +1,9 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
 
-const uploadDir = path.join(__dirname, '../../../uploads/profiles');
-fs.mkdirSync(uploadDir, { recursive: true });
-
-const storage = multer.diskStorage({
-  destination: (_req, _file, cb) => cb(null, uploadDir),
-  filename: (req, file, cb) => {
-    const ext = path.extname(file.originalname).toLowerCase() || '.jpg';
-    cb(null, `patient-${req.user._id}-${Date.now()}${ext}`);
-  },
-});
+const ALLOWED_MIME_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
 
 const fileFilter = (_req, file, cb) => {
-  const allowed = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif']);
-  if (allowed.has(file.mimetype)) {
+  if (ALLOWED_MIME_TYPES.has(file.mimetype)) {
     cb(null, true);
   } else {
     cb(new Error('Only JPEG, PNG, WebP, or GIF images are allowed.'));
@@ -23,7 +11,7 @@ const fileFilter = (_req, file, cb) => {
 };
 
 const profilePhotoUpload = multer({
-  storage,
+  storage: multer.memoryStorage(),
   fileFilter,
   limits: { fileSize: 2 * 1024 * 1024 },
 }).single('photo');
@@ -42,5 +30,4 @@ function handleProfilePhotoUpload(req, res, next) {
 
 module.exports = {
   handleProfilePhotoUpload,
-  uploadDir,
 };

@@ -44,7 +44,10 @@ app.use(
 app.use(express.json()); // parses application/json
 app.use(cookieParser()); // parses cookies into req.cookies
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Local profile photo fallback — dev only when S3 is not configured
+if (process.env.NODE_ENV !== 'production' && !process.env.AWS_S3_BUCKET) {
+  app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+}
 
 // Require CSRF token header for non-read API requests.
 app.use('/api', csrfProtection);
