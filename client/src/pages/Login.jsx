@@ -4,6 +4,7 @@ import { User, Stethoscope, Building2, Lock, Mail, ArrowRight } from 'lucide-rea
 import { useAuth } from '../context/AuthContext';
 import BrandMark from '../components/common/BrandMark';
 import SiteFooter from '../components/common/SiteFooter';
+import PasswordField from '../components/common/PasswordField';
 import toast from 'react-hot-toast';
 import '../styles/auth.css';
 
@@ -132,22 +133,19 @@ const Login = () => {
                 </div>
               </div>
 
-              <div className="input-group">
-                <label htmlFor="password">Password</label>
-                <div className="input-wrapper">
-                  <Lock className="input-icon" size={18} />
-                  <input
-                    id="password"
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleInputChange}
-                    className="input-field"
-                    placeholder="Enter password"
-                    required
-                  />
-                </div>
-              </div>
+            <div className="input-group">
+              <label htmlFor="password">Password</label>
+              <PasswordField
+                id="password"
+                name="password"
+                icon={<Lock className="input-icon" size={18} />}
+                value={formData.password}
+                onChange={handleInputChange}
+                placeholder="Enter password"
+                autoComplete="current-password"
+                required
+              />
+            </div>
 
               <button
                 type="submit"

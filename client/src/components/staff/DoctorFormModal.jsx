@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { X, Wand2, UserPlus } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../../utils/api';
+import PasswordField from '../common/PasswordField';
 
 const EMPTY_FORM = {
   name: '',
@@ -171,12 +172,14 @@ const DoctorFormModal = ({ open, onClose, onSaved, departments, editingDoctor })
 
             <label className="staff-field">
               <span>{isEdit ? 'New password (optional)' : 'Password'}</span>
-              <input
-                type="password"
+              <PasswordField
+                variant="plain"
                 value={form.password}
                 onChange={(e) => updateField('password', e.target.value)}
                 placeholder={isEdit ? 'Leave blank to keep current' : 'Min. 8 characters'}
                 minLength={isEdit ? undefined : 6}
+                autoComplete="new-password"
+                required={!isEdit}
               />
             </label>
 

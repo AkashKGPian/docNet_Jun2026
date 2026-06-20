@@ -16,6 +16,7 @@ import toast from 'react-hot-toast';
 import { useAuth } from '../../context/AuthContext';
 import BrandMark from '../../components/common/BrandMark';
 import api from '../../utils/api';
+import PasswordField from '../../components/common/PasswordField';
 import './PlatformAdminDashboard.css';
 
 const DEFAULT_DEPARTMENTS = 'General Medicine, Cardiology, Orthopedics, Pediatrics';
@@ -413,12 +414,12 @@ const PlatformAdminDashboard = () => {
 
                 <div className="input-group">
                   <label htmlFor="staffPassword">Staff password</label>
-                  <input
+                  <PasswordField
                     id="staffPassword"
-                    type="text"
-                    className="input-field"
                     value={hospitalForm.staffPassword}
                     onChange={(e) => updateHospitalField('staffPassword', e.target.value)}
+                    placeholder="Staff login password"
+                    autoComplete="new-password"
                   />
                 </div>
 
@@ -535,12 +536,12 @@ const PlatformAdminDashboard = () => {
 
                   <div className="input-group">
                     <label htmlFor="doctorPassword">Password *</label>
-                    <input
+                    <PasswordField
                       id="doctorPassword"
-                      type="text"
-                      className="input-field"
                       value={doctorForm.password}
                       onChange={(e) => updateDoctorField('password', e.target.value)}
+                      placeholder="Doctor login password"
+                      autoComplete="new-password"
                       required
                     />
                   </div>

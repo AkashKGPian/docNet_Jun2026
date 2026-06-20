@@ -6,6 +6,7 @@ import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import BrandMark from '../components/common/BrandMark';
 import SiteFooter from '../components/common/SiteFooter';
+import PasswordField from '../components/common/PasswordField';
 import '../styles/auth.css';
 
 const Signup = () => {
@@ -91,11 +92,19 @@ const Signup = () => {
               </div>
 
               <div className="auth-input-group">
-                <label>Password</label>
-                <div className="auth-input-wrapper">
-                  <Lock className="auth-input-icon" size={18} />
-                  <input type="password" name="password" value={formData.password} onChange={handleChange} className="auth-input-field" placeholder="Min 6 characters" minLength="6" required />
-                </div>
+                <label htmlFor="signup-password">Password</label>
+                <PasswordField
+                  id="signup-password"
+                  name="password"
+                  variant="auth"
+                  icon={<Lock className="auth-input-icon" size={18} />}
+                  value={formData.password}
+                  onChange={handleChange}
+                  placeholder="Min 6 characters"
+                  minLength={6}
+                  autoComplete="new-password"
+                  required
+                />
               </div>
 
               <div className="auth-input-group">
