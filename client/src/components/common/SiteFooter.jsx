@@ -30,10 +30,6 @@ const SiteFooter = () => {
       <div className="site-footer__inner">
         <div className="site-footer__brand">
           <BrandMark light />
-          <Link to="/platform/login" className="site-footer__admin-pill">
-            <Shield size={13} />
-            Platform admin
-          </Link>
           <p className="site-footer__tagline">
             Hospital queues and digital prescriptions — calm, connected care for patients, doctors, and staff.
           </p>
@@ -58,7 +54,7 @@ const SiteFooter = () => {
           </ul>
         </div>
 
-        <div className="site-footer__col">
+        <div className="site-footer__col site-footer__col--portals">
           <h3>Portals</h3>
           <ul>
             {PORTALS.map((item) => (
@@ -67,6 +63,16 @@ const SiteFooter = () => {
               </li>
             ))}
           </ul>
+          <Link to="/platform/login" className="site-footer__platform-card">
+            <span className="site-footer__platform-card-icon">
+              <Shield size={18} strokeWidth={2} />
+            </span>
+            <span className="site-footer__platform-card-body">
+              <strong>Platform admin</strong>
+              <span>Manage hospitals &amp; doctors</span>
+            </span>
+            <ArrowUpRight size={16} className="site-footer__platform-card-arrow" />
+          </Link>
         </div>
 
         <div className="site-footer__col">
@@ -112,7 +118,6 @@ const SiteFooter = () => {
       <div className="site-footer__bar">
         <span>© {new Date().getFullYear()} DocNet — Care, Connected</span>
         <div className="site-footer__bar-links">
-          <Link to="/platform/login">Platform admin</Link>
           <a href="https://www.linkedin.com/in/akash-kgpian/" target="_blank" rel="noopener noreferrer">
             LinkedIn
           </a>

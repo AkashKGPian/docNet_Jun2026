@@ -51,9 +51,14 @@ const PlatformLogin = () => {
         <aside className="platform-login-brand">
           <BrandMark light />
           <div className="platform-login-brand__copy">
-            <div className="platform-login-badge">
-              <Shield size={16} />
-              Platform Admin
+            <div className="platform-login-workspace">
+              <div className="platform-login-workspace__icon">
+                <Shield size={18} strokeWidth={2.25} />
+              </div>
+              <div>
+                <strong>Platform Admin</strong>
+                <span>Production control</span>
+              </div>
             </div>
             <h2>Production hospital control</h2>
             <p>
