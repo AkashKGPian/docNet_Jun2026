@@ -11,7 +11,7 @@
       "Resource": "arn:aws:s3:::docnet-profile-photos-akash-prod/*",
       "Condition": {
         "StringEquals": {
-          "AWS:SourceArn": "arn:aws:cloudfront::YOUR_AWS_ACCOUNT_ID:distribution/E1QLA2DVTSGPOC"
+          "AWS:SourceArn": "arn:aws:cloudfront::814330180762:distribution/E1QLA2DVTSGPOC"
         }
       }
     }

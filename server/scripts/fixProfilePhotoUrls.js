@@ -1,7 +1,7 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
 const mongoose = require('mongoose');
 const User = require('../modules/auth/models/User');
-const { buildPublicUrl } = require('../modules/shared/s3.service');
+const { buildPublicUrl, extractObjectKeyFromUrl } = require('../modules/shared/s3.service');
 
 /**
  * Fix profilePicture URLs missing https:// (or full S3 URLs) so the client loads CloudFront.
@@ -33,7 +33,12 @@ async function fixProfilePhotoUrls() {
     } else if (/^profiles\//.test(current)) {
       next = buildPublicUrl(current);
     } else if (/^https?:\/\//i.test(current)) {
-      continue;
+      const objectKey = extractObjectKeyFromUrl(current);
+      if (objectKey?.startsWith('profiles/')) {
+        next = buildPublicUrl(objectKey);
+      } else {
+        continue;
+      }
     } else if (current.includes('.amazonaws.com/')) {
       try {
         const key = new URL(current).pathname.replace(/^\//, '');

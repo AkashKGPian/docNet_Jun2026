@@ -1,7 +1,7 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
 const mongoose = require('mongoose');
 const Store = require('../modules/auth/models/Store');
-const doctorService = require('../modules/auth/services/doctorManagement.service');
+const platformAdminService = require('../modules/platform/services/platformAdmin.service');
 
 /**
  * Seed a demo doctor for a specific hospital (by name).
@@ -44,14 +44,14 @@ const createDoctorForHospital = async () => {
       process.exit(1);
     }
 
-    const { doctor } = await doctorService.seedDemoDoctor(store._id, template);
+    const result = await platformAdminService.createDoctorForHospital(store._id, template);
 
     console.log('👨‍⚕️ Created Doctor Profile!');
     console.log('-----------------------------------');
-    console.log(`Hospital:  ${store.name}`);
+    console.log(`Hospital:  ${result.hospital.name}`);
     console.log(`Email:     ${template.email}`);
     console.log(`Password:  ${template.password}`);
-    console.log(`Doctor ID: ${doctor._id}`);
+    console.log(`Doctor ID: ${result.doctor._id}`);
     console.log('-----------------------------------');
   } catch (error) {
     if (error.existing) {

@@ -34,6 +34,14 @@ export const AuthProvider = ({ children }) => {
       }
 
       try {
+        const res = await api.get('/platform/me');
+        setUser({ ...res.data.user, role: 'PLATFORM_ADMIN' });
+        return;
+      } catch {
+        // Not platform admin
+      }
+
+      try {
         const res = await api.get('/auth/staff/me');
         setUser({ ...res.data.user, role: 'STAFF' });
         return;
@@ -68,6 +76,7 @@ export const AuthProvider = ({ children }) => {
     if (role === 'PATIENT') endpoint = '/auth/patient/login';
     if (role === 'DOCTOR') endpoint = '/auth/doctor/login';
     if (role === 'STAFF') endpoint = '/auth/staff/login';
+    if (role === 'PLATFORM_ADMIN') endpoint = '/platform/login';
 
     const response = await api.post(endpoint, { email, password });
 
@@ -79,7 +88,10 @@ export const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const role = user?.role || 'PATIENT';
-      const endpoint = `/auth/${role.toLowerCase()}/logout`;
+      const endpoint =
+        role === 'PLATFORM_ADMIN'
+          ? '/platform/logout'
+          : `/auth/${role.toLowerCase()}/logout`;
       await api.post(endpoint);
     } catch (error) {
       console.error('Logout error', error);

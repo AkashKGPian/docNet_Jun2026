@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { User, Stethoscope, Building2, Lock, Mail, ArrowRight } from 'lucide-react';
+import { User, Stethoscope, Building2, Lock, Mail, ArrowRight, Shield } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import BrandMark from '../components/common/BrandMark';
 import toast from 'react-hot-toast';
@@ -19,6 +19,7 @@ const Login = () => {
     { id: 'PATIENT', label: 'Patient', icon: User },
     { id: 'DOCTOR', label: 'Doctor', icon: Stethoscope },
     { id: 'STAFF', label: 'Staff', icon: Building2 },
+    { id: 'PLATFORM_ADMIN', label: 'Platform', icon: Shield },
   ];
 
   const handleInputChange = (e) => {
@@ -40,7 +41,9 @@ const Login = () => {
       const redirectPath =
         location.state?.from?.pathname && location.state.from.pathname !== '/'
           ? location.state.from.pathname
-          : `/${activeRole.toLowerCase()}`;
+          : activeRole === 'PLATFORM_ADMIN'
+            ? '/platform'
+            : `/${activeRole.toLowerCase()}`;
 
       navigate(redirectPath, { replace: true });
     } catch (error) {
@@ -154,7 +157,12 @@ const Login = () => {
               style={{ marginTop: '0.5rem', height: '2.75rem', position: 'relative' }}
             >
               <span style={{ opacity: isLoading ? 0 : 1, display: 'inline-flex', alignItems: 'center', gap: '0.5rem' }}>
-                Sign in as {activeRole === 'STAFF' ? 'Staff' : activeRole.charAt(0) + activeRole.slice(1).toLowerCase()}
+                Sign in as{' '}
+                {activeRole === 'STAFF'
+                  ? 'Staff'
+                  : activeRole === 'PLATFORM_ADMIN'
+                    ? 'Platform Admin'
+                    : activeRole.charAt(0) + activeRole.slice(1).toLowerCase()}
                 <ArrowRight size={18} />
               </span>
               {isLoading && (
@@ -164,6 +172,13 @@ const Login = () => {
               )}
             </button>
           </form>
+
+          {activeRole === 'PLATFORM_ADMIN' && (
+            <p className="auth-role-hint">
+              DocNet platform admin — manages all hospitals in production. Account created via{' '}
+              <strong>createPlatformAdmin.js</strong>.
+            </p>
+          )}
 
           {activeRole === 'STAFF' && (
             <p className="auth-role-hint">

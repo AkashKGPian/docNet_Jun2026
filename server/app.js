@@ -24,7 +24,7 @@ const limiter = rateLimit({
   max: isDev ? 2000 : 100,
   skip: (req) => {
     const path = req.originalUrl || req.url || '';
-    return /\/auth\/(csrf-token|(patient|doctor|staff)\/(login|signup))/.test(path);
+    return /\/auth\/(csrf-token|(patient|doctor|staff)\/(login|signup))|\/platform\/login/.test(path);
   },
   message: { error: 'Too many requests from this IP, please try again after 15 minutes' },
   standardHeaders: true,
@@ -58,6 +58,7 @@ app.use('/api', csrfProtection);
 
 // Base auth routes
 app.use('/api/auth', require('./modules/auth/routes/auth.routes'));
+app.use('/api/platform', require('./modules/platform/routes/platform.routes'));
 app.use('/api/stores', require('./modules/store/routes/store.routes'));
 
 // Queue routes

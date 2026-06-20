@@ -87,6 +87,13 @@ function requireStaffOrDoctor(req, res, next) {
   next();
 }
 
+function requirePlatformAdmin(req, res, next) {
+  if (req.user.role !== 'PLATFORM_ADMIN') {
+    return res.status(403).json({ error: 'Platform admin access only.' });
+  }
+  next();
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 // MIDDLEWARE 3: enforceStoreScope  ← THE CRITICAL SECURITY FIX
 // ─────────────────────────────────────────────────────────────────────────────
@@ -144,5 +151,6 @@ module.exports = {
   requireStaff,
   requireDoctor,
   requireStaffOrDoctor,
+  requirePlatformAdmin,
   enforceStoreScope,
 };

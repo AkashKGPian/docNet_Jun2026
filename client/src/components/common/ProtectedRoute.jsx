@@ -28,6 +28,7 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
       PATIENT: '/patient',
       DOCTOR: '/doctor',
       STAFF: '/staff',
+      PLATFORM_ADMIN: '/platform',
     };
     return <Navigate to={dashboardMap[user.role] || '/login'} replace />;
   }

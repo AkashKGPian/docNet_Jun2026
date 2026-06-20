@@ -17,6 +17,10 @@ function normalizeCloudFrontUrl(value) {
 }
 
 const CLOUDFRONT_URL = normalizeCloudFrontUrl(process.env.AWS_CLOUDFRONT_URL);
+// When CloudFront origin has path "/profiles", viewer URLs must NOT include "profiles/" again.
+const CLOUDFRONT_ORIGIN_PATH = (process.env.AWS_CLOUDFRONT_ORIGIN_PATH || '')
+  .trim()
+  .replace(/\/$/, '');
 
 let s3Client;
 
@@ -37,8 +41,33 @@ function buildProfileObjectKey(patientId, originalName) {
   return `profiles/patient-${patientId}-${Date.now()}${safeExt}`;
 }
 
+function objectKeyToViewerPath(objectKey) {
+  if (!CLOUDFRONT_ORIGIN_PATH) return objectKey;
+
+  const originPrefix = `${CLOUDFRONT_ORIGIN_PATH.replace(/^\//, '')}/`;
+  if (objectKey.startsWith(originPrefix)) {
+    return objectKey.slice(originPrefix.length);
+  }
+
+  return objectKey;
+}
+
+function viewerPathToObjectKey(viewerPath) {
+  const normalized = (viewerPath || '').replace(/^\//, '');
+  if (!normalized) return null;
+
+  if (!CLOUDFRONT_ORIGIN_PATH) return normalized;
+
+  const originPrefix = CLOUDFRONT_ORIGIN_PATH.replace(/^\//, '');
+  if (normalized.startsWith(`${originPrefix}/`)) {
+    return normalized;
+  }
+
+  return `${originPrefix}/${normalized}`;
+}
+
 function buildPublicUrl(objectKey) {
-  return `${CLOUDFRONT_URL}/${objectKey}`;
+  return `${CLOUDFRONT_URL}/${objectKeyToViewerPath(objectKey)}`;
 }
 
 function extractObjectKeyFromUrl(url) {
@@ -51,12 +80,14 @@ function extractObjectKeyFromUrl(url) {
   const normalizedUrl = /^[\w.-]+\.cloudfront\.net\//i.test(url) ? `https://${url}` : url;
 
   if (CLOUDFRONT_URL && normalizedUrl.startsWith(`${CLOUDFRONT_URL}/`)) {
-    return normalizedUrl.slice(CLOUDFRONT_URL.length + 1);
+    const viewerPath = normalizedUrl.slice(CLOUDFRONT_URL.length + 1);
+    return viewerPathToObjectKey(viewerPath);
   }
 
   try {
     const parsed = new URL(normalizedUrl);
-    return parsed.pathname.replace(/^\//, '') || null;
+    const viewerPath = parsed.pathname.replace(/^\//, '') || null;
+    return viewerPath ? viewerPathToObjectKey(viewerPath) : null;
   } catch {
     return null;
   }

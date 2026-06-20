@@ -1,0 +1,439 @@
+.platform-shell {
+  min-height: 100vh;
+  display: flex;
+  background: var(--canvas);
+}
+
+.platform-sidebar {
+  width: 17rem;
+  flex-shrink: 0;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.platform-sidebar__brand {
+  padding: 0 0.5rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.platform-sidebar__brand .brand-mark__name {
+  color: #f8fafc;
+}
+
+.platform-sidebar__brand .brand-mark__tagline {
+  color: rgba(226, 232, 240, 0.65);
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: rgba(251, 191, 36, 0.15);
+  color: #fcd34d;
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.platform-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.platform-nav__item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.75rem 0.875rem;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: rgba(226, 232, 240, 0.82);
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease), color var(--duration) var(--ease);
+  text-align: left;
+}
+
+.platform-nav__item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #f8fafc;
+}
+
+.platform-nav__item.active {
+  background: rgba(15, 118, 110, 0.35);
+  color: #ccfbf1;
+  box-shadow: inset 0 0 0 1px rgba(45, 212, 191, 0.2);
+}
+
+.platform-sidebar__footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.platform-user {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.75rem;
+  padding: 0 0.25rem;
+}
+
+.platform-user__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  background: rgba(251, 191, 36, 0.2);
+  color: #fcd34d;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.platform-user strong {
+  display: block;
+  font-size: 0.8125rem;
+  color: #f8fafc;
+}
+
+.platform-user span {
+  font-size: 0.6875rem;
+  color: rgba(226, 232, 240, 0.55);
+  word-break: break-all;
+}
+
+.platform-logout {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(226, 232, 240, 0.85);
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--duration) var(--ease);
+}
+
+.platform-logout:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.platform-main {
+  flex: 1;
+  padding: 2rem 2.25rem;
+  overflow-y: auto;
+}
+
+.platform-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.platform-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 400;
+  margin-bottom: 0.35rem;
+  color: var(--ink);
+}
+
+.platform-header p {
+  color: var(--ink-muted);
+  max-width: 36rem;
+  line-height: 1.55;
+}
+
+.platform-success-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem 1.125rem;
+  margin-bottom: 1.25rem;
+  border-radius: var(--radius-lg);
+  background: var(--success-soft);
+  border: 1px solid rgba(4, 120, 87, 0.2);
+  color: var(--success);
+}
+
+.platform-success-banner code {
+  font-size: 0.8125rem;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
+
+.platform-success-banner button {
+  margin-left: auto;
+  border: none;
+  background: none;
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+}
+
+.platform-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.platform-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 1.125rem 1.25rem;
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  color: var(--brand);
+}
+
+.platform-stat-card strong {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.1;
+}
+
+.platform-stat-card span {
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+}
+
+.platform-panel {
+  background: var(--surface-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 1.5rem;
+}
+
+.platform-panel__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.platform-panel__head h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.platform-panel__head p {
+  margin-top: 0.25rem;
+  font-size: 0.875rem;
+  color: var(--ink-muted);
+}
+
+.platform-panel__head code {
+  font-size: 0.8125rem;
+  background: var(--canvas);
+  padding: 0.1rem 0.35rem;
+  border-radius: 0.25rem;
+}
+
+.platform-hospital-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.platform-hospital-card {
+  padding: 1.125rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--canvas);
+  transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
+}
+
+.platform-hospital-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.platform-hospital-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.platform-hospital-card__head h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.platform-pill {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.platform-pill.active {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.platform-pill.inactive {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.platform-hospital-card__address {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.35rem;
+  font-size: 0.8125rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.75rem;
+}
+
+.platform-hospital-card__meta {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink-subtle);
+  margin-bottom: 0.5rem;
+}
+
+.platform-hospital-card__staff {
+  font-size: 0.75rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.875rem;
+  word-break: break-all;
+}
+
+.platform-hospital-card__actions {
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+.platform-form-panel {
+  max-width: 52rem;
+}
+
+.platform-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.platform-form-grid .span-2 {
+  grid-column: span 2;
+}
+
+.platform-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+
+.platform-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.platform-loading,
+.platform-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--ink-muted);
+}
+
+.platform-empty.inline {
+  padding: 2rem 0;
+}
+
+.platform-empty h3 {
+  margin: 0.75rem 0 0.35rem;
+  color: var(--ink);
+}
+
+.platform-empty p {
+  margin-bottom: 1rem;
+}
+
+.platform-empty .btn {
+  margin-top: 0.5rem;
+}
+
+.btn-sm {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.spin {
+  animation: platform-spin 0.8s linear infinite;
+}
+
+@keyframes platform-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 900px) {
+  .platform-shell {
+    flex-direction: column;
+  }
+
+  .platform-sidebar {
+    width: 100%;
+  }
+
+  .platform-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-form-grid .span-2 {
+    grid-column: span 1;
+  }
+}

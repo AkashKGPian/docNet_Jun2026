@@ -12,6 +12,7 @@ import HospitalView from './pages/patient/HospitalView';
 import DoctorDashboard from './pages/doctor/DoctorDashboard';
 import Canvas from './pages/doctor/Canvas';
 import StaffDashboard from './pages/staff/StaffDashboard';
+import PlatformAdminDashboard from './pages/platform/PlatformAdminDashboard';
 import PrescriptionView from './pages/patient/PrescriptionView';
 import PrescriptionHistory from './pages/patient/PrescriptionHistory';
 import PatientProfileEdit from './pages/patient/PatientProfileEdit';
@@ -90,6 +91,12 @@ function App() {
           <Route path="/staff" element={
             <ProtectedRoute allowedRoles={['STAFF']}>
               <StaffDashboard />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/platform" element={
+            <ProtectedRoute allowedRoles={['PLATFORM_ADMIN']}>
+              <PlatformAdminDashboard />
             </ProtectedRoute>
           } />
           

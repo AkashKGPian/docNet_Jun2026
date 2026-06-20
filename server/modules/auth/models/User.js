@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 /**
  * User Model — DocNet MVP
  *
- * Handles authentication for all 3 roles: PATIENT, STAFF, DOCTOR.
+ * Handles authentication for all roles: PATIENT, STAFF, DOCTOR, PLATFORM_ADMIN.
  *
  * SECURITY: storeId is REQUIRED for STAFF and DOCTOR roles.
  * It is enforced at the application layer via the `pre('save')` hook below.
@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema(
 
     role: {
       type: String,
-      enum: ['PATIENT', 'STAFF', 'DOCTOR'],  // DOCTOR added vs SmartQ
+      enum: ['PATIENT', 'STAFF', 'DOCTOR', 'PLATFORM_ADMIN'],
       default: 'PATIENT',
     },
 
@@ -103,8 +103,8 @@ UserSchema.pre('save', function (next) {
       new Error(`storeId is required for role ${this.role}. Every staff/doctor must belong to a store.`)
     );
   }
-  if (this.role === 'PATIENT' && this.storeId) {
-    // Patients are not scoped — silently clear it so DB stays clean
+  if ((this.role === 'PATIENT' || this.role === 'PLATFORM_ADMIN') && this.storeId) {
+    // Patients and platform admins are not store-scoped
     this.storeId = null;
   }
   next();
