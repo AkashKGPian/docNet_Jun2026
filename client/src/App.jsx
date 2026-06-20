@@ -13,6 +13,7 @@ import DoctorDashboard from './pages/doctor/DoctorDashboard';
 import Canvas from './pages/doctor/Canvas';
 import StaffDashboard from './pages/staff/StaffDashboard';
 import PlatformAdminDashboard from './pages/platform/PlatformAdminDashboard';
+import PlatformLogin from './pages/platform/PlatformLogin';
 import PrescriptionView from './pages/patient/PrescriptionView';
 import PrescriptionHistory from './pages/patient/PrescriptionHistory';
 import PatientProfileEdit from './pages/patient/PatientProfileEdit';
@@ -39,6 +40,7 @@ function App() {
           <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/platform/login" element={<PlatformLogin />} />
           
           <Route path="/patient" element={
             <ProtectedRoute allowedRoles={['PATIENT']}>

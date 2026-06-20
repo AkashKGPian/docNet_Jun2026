@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 import BrandMark from '../components/common/BrandMark';
+import SiteFooter from '../components/common/SiteFooter';
 import '../styles/auth.css';
 
 const Signup = () => {
@@ -51,6 +52,7 @@ const Signup = () => {
   };
 
   return (
+    <div className="auth-page">
     <div className="auth-shell">
       <aside className="auth-brand-panel">
         <BrandMark light />
@@ -165,6 +167,8 @@ const Signup = () => {
           </p>
         </div>
       </main>
+    </div>
+    <SiteFooter />
     </div>
   );
 };

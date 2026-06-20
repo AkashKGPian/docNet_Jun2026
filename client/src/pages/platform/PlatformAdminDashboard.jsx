@@ -184,11 +184,13 @@ const PlatformAdminDashboard = () => {
     <div className="platform-shell">
       <aside className="platform-sidebar">
         <div className="platform-sidebar__brand">
-          <BrandMark compact />
-          <span className="platform-badge">
-            <Shield size={14} />
-            Platform Admin
-          </span>
+          <div className="platform-sidebar__brand-row">
+            <BrandMark light />
+            <span className="platform-badge">
+              <Shield size={13} />
+              Platform Admin
+            </span>
+          </div>
         </div>
 
         <nav className="platform-nav">
