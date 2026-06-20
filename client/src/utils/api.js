@@ -12,6 +12,11 @@ export function getAssetUrl(path) {
   // CloudFront / absolute URLs — use as-is in all environments
   if (/^https?:\/\//i.test(path)) return path;
 
+  // Legacy URLs stored without https:// (e.g. dxxxx.cloudfront.net/profiles/...)
+  if (/^[\w.-]+\.cloudfront\.net\//i.test(path)) {
+    return `https://${path}`;
+  }
+
   const normalized = path.startsWith('/') ? path : `/${path}`;
 
   // Dev only: legacy local disk photos via Vite /uploads proxy

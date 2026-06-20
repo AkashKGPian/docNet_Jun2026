@@ -8,7 +8,15 @@ const {
 
 const REGION = process.env.AWS_REGION || 'ap-south-1';
 const BUCKET = process.env.AWS_S3_BUCKET;
-const CLOUDFRONT_URL = (process.env.AWS_CLOUDFRONT_URL || '').replace(/\/$/, '');
+
+function normalizeCloudFrontUrl(value) {
+  const trimmed = (value || '').trim().replace(/\/$/, '');
+  if (!trimmed) return '';
+  if (/^https?:\/\//i.test(trimmed)) return trimmed;
+  return `https://${trimmed}`;
+}
+
+const CLOUDFRONT_URL = normalizeCloudFrontUrl(process.env.AWS_CLOUDFRONT_URL);
 
 let s3Client;
 
@@ -40,12 +48,14 @@ function extractObjectKeyFromUrl(url) {
     return null;
   }
 
-  if (CLOUDFRONT_URL && url.startsWith(`${CLOUDFRONT_URL}/`)) {
-    return url.slice(CLOUDFRONT_URL.length + 1);
+  const normalizedUrl = /^[\w.-]+\.cloudfront\.net\//i.test(url) ? `https://${url}` : url;
+
+  if (CLOUDFRONT_URL && normalizedUrl.startsWith(`${CLOUDFRONT_URL}/`)) {
+    return normalizedUrl.slice(CLOUDFRONT_URL.length + 1);
   }
 
   try {
-    const parsed = new URL(url);
+    const parsed = new URL(normalizedUrl);
     return parsed.pathname.replace(/^\//, '') || null;
   } catch {
     return null;
@@ -124,4 +134,5 @@ module.exports = {
   uploadProfilePhotoLocal,
   deleteProfilePhotoLocal,
   buildPublicUrl,
+  getS3Client,
 };

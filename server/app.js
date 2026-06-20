@@ -73,6 +73,17 @@ app.get('/api/health', (req, res) => {
   res.status(200).json({ status: 'ok', message: 'DocNet API is running' });
 });
 
+// Profile photo pipeline diagnostic (S3 list + CloudFront probe + DB URL check)
+app.get('/api/health/profile-media', async (req, res) => {
+  try {
+    const { runProfileMediaDiagnostics } = require('./modules/shared/mediaDiagnostics');
+    const report = await runProfileMediaDiagnostics();
+    res.status(200).json(report);
+  } catch (error) {
+    res.status(500).json({ error: error.message || 'Profile media diagnostic failed.' });
+  }
+});
+
 // 404 Fallback
 app.use((req, res) => {
   res.status(404).json({ error: 'Route not found' });
