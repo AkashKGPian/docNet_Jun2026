@@ -5,6 +5,7 @@ const patientAuth = require('../controllers/patient.auth');
 const staffAuth = require('../controllers/staff.auth');
 const staffDoctor = require('../controllers/staff.doctor.controller');
 const doctorAuth = require('../controllers/doctor.auth');
+const sessionController = require('../controllers/session.controller');
 const csrfController = require('../controllers/csrf.controller');
 const { handleProfilePhotoUpload } = require('../middleware/upload.middleware');
 const { isAuthenticated, requirePatient, requireStaff, requireDoctor } = require('../middleware/auth.middleware');
@@ -17,6 +18,9 @@ const { isAuthenticated, requirePatient, requireStaff, requireDoctor } = require
 // GET /api/auth/csrf-token
 // Issues a CSRF token cookie and response value used by mutating requests.
 router.get('/csrf-token', csrfController.getCsrfToken);
+
+// GET /api/auth/me — single session check for any logged-in role
+router.get('/me', isAuthenticated, sessionController.getCurrentSession);
 
 // POST /api/auth/patient/signup
 // Register a new patient and log them in

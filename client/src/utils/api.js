@@ -81,9 +81,9 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     const url = error.config?.url || '';
-    const isSessionProbe = /\/auth\/(patient|doctor|staff)\/me|\/platform\/me/.test(url);
+    const isSessionProbe = /\/auth\/me|\/auth\/(patient|doctor|staff)\/me|\/platform\/me/.test(url);
 
-    // 401 on /me probes is expected when checking which role is logged in — do not clear session
+    // 401 on session probes is expected when no one is logged in — do not clear session
     if (error.response?.status === 401 && !isSessionProbe) {
       window.dispatchEvent(new CustomEvent('docnet:unauthorized'));
     }

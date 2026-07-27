@@ -5,11 +5,11 @@ const canvasController = require('../controllers/canvas.controller');
 const { isAuthenticated, requireDoctor } = require('../../auth/middleware/auth.middleware');
 
 // ─────────────────────────────────────────────────────────────────────────────
-// CANVAS ROUTES (TrOCR Proxy)
+// CANVAS ROUTES (parse recognized text from client-side Tesseract.js OCR)
 // Base path: /api/canvas
 // ─────────────────────────────────────────────────────────────────────────────
 
-// Send a raw base64 PNG from the scribble canvas to Hugging Face TrOCR
+// Parse medicine row text (from manual entry or client OCR)
 // Only doctors can access this endpoint
 router.post('/recognize', isAuthenticated, requireDoctor, canvasController.recognizeImage);
 

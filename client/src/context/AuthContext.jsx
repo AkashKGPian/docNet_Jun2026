@@ -16,42 +16,12 @@ export const AuthProvider = ({ children }) => {
   const checkCurrentUser = useCallback(async () => {
     try {
       setLoading(true);
-
-      try {
-        const res = await api.get('/auth/patient/me');
-        setUser({ ...res.data.user, role: 'PATIENT' });
-        return;
-      } catch {
-        // Not a patient
-      }
-
-      try {
-        const res = await api.get('/auth/doctor/me');
-        setUser({ ...res.data.user, role: 'DOCTOR' });
-        return;
-      } catch {
-        // Not a doctor
-      }
-
-      try {
-        const res = await api.get('/platform/me');
-        setUser({ ...res.data.user, role: 'PLATFORM_ADMIN' });
-        return;
-      } catch {
-        // Not platform admin
-      }
-
-      try {
-        const res = await api.get('/auth/staff/me');
-        setUser({ ...res.data.user, role: 'STAFF' });
-        return;
-      } catch {
-        // Not staff
-      }
-
-      setUser(null);
+      const res = await api.get('/auth/me');
+      setUser(res.data.user);
     } catch (error) {
-      console.error('Session check failed', error);
+      if (error.response?.status !== 401) {
+        console.error('Session check failed', error);
+      }
       setUser(null);
     } finally {
       setLoading(false);
@@ -110,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </AuthContext.Provider>
   );
 };
